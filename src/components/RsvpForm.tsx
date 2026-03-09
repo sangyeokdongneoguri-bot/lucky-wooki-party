@@ -70,7 +70,7 @@ export default function RsvpForm() {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload),
       });
       localStorage.setItem(STORAGE_KEY, 'true');
