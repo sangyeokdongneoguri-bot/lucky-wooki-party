@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-// Fill in the deployed Google Apps Script URL here
-const GOOGLE_SCRIPT_URL = '';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZVwEHVHi4UpUkMoVzMt9sOw6wYzTt51NVONq66YPxQXuXw9skIZcjTEQ0Nm9LMd4I4A/exec';
 
 const PINK = '#FF69B4';
 const STORAGE_KEY = 'rsvp_submitted';
@@ -9,10 +8,17 @@ const STORAGE_KEY = 'rsvp_submitted';
 type Attendance = 'yes' | 'partial' | 'no' | '';
 type Side = 'bride' | 'groom' | '';
 
+// 17:30 ~ 22:00, 30-minute intervals
+const TIME_OPTIONS = [
+  '17:30', '18:00', '18:30', '19:00', '19:30',
+  '20:00', '20:30', '21:00', '21:30', '22:00',
+];
+
 interface FormState {
   name: string;
   attendance: Attendance;
-  time: string;
+  timeStart: string;
+  timeEnd: string;
   side: Side;
 }
 
@@ -20,7 +26,8 @@ export default function RsvpForm() {
   const [form, setForm] = useState<FormState>({
     name: '',
     attendance: '',
-    time: '',
+    timeStart: '',
+    timeEnd: '',
     side: '',
   });
   const [loading, setLoading] = useState(false);
@@ -47,18 +54,17 @@ export default function RsvpForm() {
           ? '일부 참석'
           : '불참';
 
+    const timeRange =
+      form.attendance === 'partial' && form.timeStart && form.timeEnd
+        ? `${form.timeStart} ~ ${form.timeEnd}`
+        : '';
+
     const payload = {
       name: form.name.trim(),
       attendance: attendanceLabel,
-      time: form.attendance === 'partial' ? form.time : '',
+      time: timeRange,
       side: form.side === 'bride' ? '신부측' : '신랑측',
     };
-
-    if (!GOOGLE_SCRIPT_URL) {
-      setError('RSVP 기능이 아직 준비 중입니다. 잠시 후 다시 시도해 주세요.');
-      setLoading(false);
-      return;
-    }
 
     try {
       await fetch(GOOGLE_SCRIPT_URL, {
@@ -99,11 +105,29 @@ export default function RsvpForm() {
     );
   }
 
+  const selectStyle: React.CSSProperties = {
+    flex: 1,
+    padding: '10px 12px',
+    borderRadius: 10,
+    border: '1.5px solid #f0b8d8',
+    fontSize: 14,
+    outline: 'none',
+    boxSizing: 'border-box',
+    fontFamily: "'Noto Sans KR', sans-serif",
+    backgroundColor: '#fff',
+    color: '#333',
+    appearance: 'none',
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 12px center',
+    paddingRight: 32,
+  };
+
   const inputStyle: React.CSSProperties = {
     width: '100%',
     padding: '10px 14px',
     borderRadius: 10,
-    border: `1.5px solid #f0b8d8`,
+    border: '1.5px solid #f0b8d8',
     fontSize: 14,
     outline: 'none',
     boxSizing: 'border-box',
@@ -129,8 +153,14 @@ export default function RsvpForm() {
     textAlign: 'left',
   };
 
-  const isValid = form.name.trim() && form.attendance && form.side &&
-    (form.attendance !== 'partial' || form.time.trim());
+  // Filter end time options to be after start time
+  const endTimeOptions = form.timeStart
+    ? TIME_OPTIONS.filter((t) => t > form.timeStart)
+    : TIME_OPTIONS.slice(1);
+
+  const isPartialValid =
+    form.attendance !== 'partial' || (form.timeStart && form.timeEnd);
+  const isValid = form.name.trim() && form.attendance && form.side && isPartialValid;
 
   return (
     <div
@@ -187,7 +217,7 @@ export default function RsvpForm() {
                   value={value}
                   checked={form.attendance === value}
                   onChange={() =>
-                    setForm({ ...form, attendance: value as Attendance, time: '' })
+                    setForm({ ...form, attendance: value as Attendance, timeStart: '', timeEnd: '' })
                   }
                   style={{ accentColor: PINK, width: 16, height: 16 }}
                 />
@@ -196,16 +226,41 @@ export default function RsvpForm() {
             ))}
           </div>
 
-          {/* Conditional time input */}
+          {/* Time range selectors */}
           {form.attendance === 'partial' && (
-            <div style={{ marginTop: 10, paddingLeft: 24 }}>
-              <input
-                type="text"
-                placeholder="참석 가능한 시간대를 입력해 주세요 (예: 14:00~16:00)"
-                value={form.time}
-                onChange={(e) => setForm({ ...form, time: e.target.value })}
-                style={{ ...inputStyle, fontSize: 13 }}
-              />
+            <div style={{ marginTop: 12, paddingLeft: 24 }}>
+              <div style={{ fontSize: 12, color: '#999', marginBottom: 8 }}>
+                참석 가능한 시간대를 선택해 주세요
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <select
+                  value={form.timeStart}
+                  onChange={(e) =>
+                    setForm({ ...form, timeStart: e.target.value, timeEnd: '' })
+                  }
+                  style={selectStyle}
+                >
+                  <option value="">시작 시간</option>
+                  {TIME_OPTIONS.slice(0, -1).map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+                <span style={{ fontSize: 14, color: '#999', flexShrink: 0 }}>~</span>
+                <select
+                  value={form.timeEnd}
+                  onChange={(e) => setForm({ ...form, timeEnd: e.target.value })}
+                  style={{
+                    ...selectStyle,
+                    color: form.timeStart ? '#333' : '#ccc',
+                  }}
+                  disabled={!form.timeStart}
+                >
+                  <option value="">종료 시간</option>
+                  {endTimeOptions.map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           )}
         </div>
