@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwZVwEHVHi4UpUkMoVzMt9sOw6wYzTt51NVONq66YPxQXuXw9skIZcjTEQ0Nm9LMd4I4A/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw73Z2SCqK6_MvDNKJk_gz3AX8_Tel0gJQq5Lx2yzd60g530Cy4V97ny_fq5MhDcc4ohg/exec';
 
 const PINK = '#FF69B4';
 const STORAGE_KEY = 'rsvp_submitted';
