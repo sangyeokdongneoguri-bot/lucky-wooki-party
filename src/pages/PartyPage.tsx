@@ -23,7 +23,7 @@ export default function PartyPage() {
       style={{
         maxWidth: 480,
         margin: '0 auto',
-        fontFamily: "'Noto Sans KR', sans-serif",
+        fontFamily: "'Saenggeo Jincheon', sans-serif",
         overflowX: 'hidden',
         backgroundColor: '#fff',
       }}
@@ -91,16 +91,6 @@ export default function PartyPage() {
                 filter: 'drop-shadow(0 4px 20px rgba(255,105,180,0.4))',
               }}
             />
-          </motion.div>
-
-          {/* Party emoji row */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3, type: 'spring', stiffness: 200 }}
-            style={{ fontSize: 28, margin: '4px 0 8px', letterSpacing: 8 }}
-          >
-            🎉🥂🪩🥂🎉
           </motion.div>
 
           {/* Date subtitle */}
@@ -303,7 +293,7 @@ export default function PartyPage() {
                 fontWeight: 700,
                 letterSpacing: 14,
                 margin: '0 0 8px',
-                fontFamily: "'Gaegu', cursive",
+                fontFamily: "'Saenggeo Jincheon', sans-serif",
                 background: `linear-gradient(90deg, ${PINK}, ${MAGENTA}, #FF4500, ${PINK})`,
                 backgroundSize: '200% auto',
                 WebkitBackgroundClip: 'text',
@@ -437,7 +427,7 @@ export default function PartyPage() {
                   fontSize: 32,
                   fontWeight: 700,
                   display: 'block',
-                  fontFamily: "'Gaegu', cursive",
+                  fontFamily: "'Saenggeo Jincheon', sans-serif",
                   background: `linear-gradient(90deg, ${PINK}, ${MAGENTA})`,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -452,7 +442,7 @@ export default function PartyPage() {
                   fontSize: 16,
                   fontStyle: 'italic',
                   color: '#C06090',
-                  fontFamily: 'Georgia, serif',
+                  fontFamily: "'Saenggeo Jincheon', sans-serif",
                 }}
               >
                 Pre-Wedding party
@@ -528,7 +518,7 @@ export default function PartyPage() {
                 fontSize: 15,
                 fontWeight: 700,
                 marginTop: 14,
-                fontFamily: 'Georgia, serif',
+                fontFamily: "'Saenggeo Jincheon', sans-serif",
                 letterSpacing: 0.5,
                 background: `linear-gradient(90deg, ${GOLD}, #D4A017, ${GOLD})`,
                 backgroundSize: '200% auto',

@@ -131,7 +131,7 @@ export default function RsvpForm() {
     fontSize: 14,
     outline: 'none',
     boxSizing: 'border-box',
-    fontFamily: "'Noto Sans KR', sans-serif",
+    fontFamily: "'Saenggeo Jincheon', sans-serif",
     backgroundColor: '#fff',
     color: '#333',
     appearance: 'none',
@@ -149,7 +149,7 @@ export default function RsvpForm() {
     fontSize: 14,
     outline: 'none',
     boxSizing: 'border-box',
-    fontFamily: "'Noto Sans KR', sans-serif",
+    fontFamily: "'Saenggeo Jincheon', sans-serif",
   };
 
   const radioLabelStyle: React.CSSProperties = {
@@ -198,7 +198,7 @@ export default function RsvpForm() {
           color: PINK,
           margin: '0 0 20px',
           textAlign: 'center',
-          fontFamily: "'Gaegu', cursive",
+          fontFamily: "'Saenggeo Jincheon', sans-serif",
           letterSpacing: 2,
         }}
       >
@@ -322,7 +322,7 @@ export default function RsvpForm() {
             fontWeight: 700,
             border: 'none',
             cursor: isValid && !loading ? 'pointer' : 'not-allowed',
-            fontFamily: "'Noto Sans KR', sans-serif",
+            fontFamily: "'Saenggeo Jincheon', sans-serif",
             transition: 'background-color 0.2s',
           }}
         >
