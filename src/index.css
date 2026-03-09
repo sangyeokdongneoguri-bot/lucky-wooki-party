@@ -130,6 +130,15 @@ img {
   }
 }
 
+@keyframes envelope-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255,105,180,0.4), 0 0 40px rgba(255,105,180,0.2), 0 0 60px rgba(255,215,0,0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255,105,180,0.6), 0 0 60px rgba(255,105,180,0.35), 0 0 90px rgba(255,215,0,0.2), 0 0 120px rgba(255,105,180,0.1);
+  }
+}
+
 @keyframes star-twinkle {
   0%, 100% { opacity: 0.3; transform: scale(0.8); }
   50% { opacity: 1; transform: scale(1.2); }

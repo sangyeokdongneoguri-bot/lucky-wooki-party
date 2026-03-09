@@ -320,7 +320,28 @@ export default function PartyPage() {
                 justifyContent: 'center',
               }}
             >
-              <span style={{ fontSize: 72, filter: 'drop-shadow(0 4px 12px rgba(255,105,180,0.3))' }}>✉️</span>
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 96,
+                  height: 96,
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle, rgba(255,240,248,0.9) 0%, rgba(255,240,248,0) 70%)',
+                  animation: 'envelope-glow 3s ease-in-out infinite',
+                }}
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/2709.svg"
+                  alt="envelope"
+                  style={{
+                    width: 64,
+                    height: 64,
+                    filter: 'drop-shadow(0 4px 16px rgba(255,105,180,0.5))',
+                  }}
+                />
+              </div>
             </motion.div>
           </ScrollReveal>
 
