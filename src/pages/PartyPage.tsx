@@ -375,7 +375,7 @@ export default function PartyPage() {
               {[
                 {
                   label: '네이버지도',
-                  href: `https://map.naver.com/p/search/${encodeURIComponent(partyData.location.address)}`,
+                  href: 'https://naver.me/GMmg4L4y',
                   gradient: `linear-gradient(135deg, ${PINK}, ${MAGENTA})`,
                 },
                 {
