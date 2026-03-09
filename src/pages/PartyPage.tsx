@@ -383,32 +383,12 @@ export default function PartyPage() {
                   href: `https://map.kakao.com/link/map/${encodeURIComponent(partyData.location.name)},${partyData.location.lat},${partyData.location.lng}`,
                   gradient: `linear-gradient(135deg, ${CORAL}, #FF4500)`,
                 },
-                {
-                  label: '티맵',
-                  href: `tmap://route?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`,
-                  gradient: `linear-gradient(135deg, #FFD700, #FFA500)`,
-                  isTmap: true,
-                },
-              ].map(({ label, href, gradient, isTmap }) => (
+              ].map(({ label, href, gradient }) => (
                 <a
                   key={label}
                   href={href}
-                  target={isTmap ? undefined : '_blank'}
-                  rel={isTmap ? undefined : 'noopener noreferrer'}
-                  onClick={
-                    isTmap
-                      ? (e) => {
-                          e.preventDefault();
-                          window.location.href = href;
-                          setTimeout(() => {
-                            window.open(
-                              `https://tmap.life/navigate?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`,
-                              '_blank',
-                            );
-                          }, 1500);
-                        }
-                      : undefined
-                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -505,11 +485,12 @@ export default function PartyPage() {
                 >
                   <span
                     style={{
-                      fontSize: 18,
+                      fontSize: 13,
+                      lineHeight: 1.7,
                       color: 'rgba(255,255,255,0.9)',
                       flexShrink: 0,
-                      marginTop: 1,
                       textShadow: '0 1px 4px rgba(0,0,0,0.1)',
+                      fontWeight: 700,
                     }}
                   >
                     {circleNumbers[i] ?? String(i + 1)}
