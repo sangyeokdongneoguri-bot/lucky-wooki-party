@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { partyData } from '../data/party';
 import ScrollReveal from '../components/ScrollReveal';
 import useCountdown from '../hooks/useCountdown';
+import RsvpForm from '../components/RsvpForm';
 
 const PINK = '#FF69B4';
 const RED = '#FF0000';
@@ -91,28 +92,7 @@ function Sun() {
   );
 }
 
-function HeartBadge({ style }: { style?: React.CSSProperties }) {
-  return (
-    <div
-      style={{
-        width: 44,
-        height: 44,
-        borderRadius: '50%',
-        backgroundColor: '#fff',
-        border: '2px solid #4CAF50',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 22,
-        ...style,
-      }}
-    >
-      ♥
-    </div>
-  );
-}
-
-const circleNumbers = ['①', '②', '③', '④', '⑤', '⑥', '⑦'];
+const circleNumbers = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧'];
 
 export default function PartyPage() {
   const countdown = useCountdown(partyData.dDay);
@@ -202,10 +182,11 @@ export default function PartyPage() {
             <div
               style={{
                 fontSize: 42,
-                fontWeight: 900,
+                fontWeight: 700,
                 lineHeight: 1.2,
                 marginBottom: 8,
                 letterSpacing: '-1px',
+                fontFamily: "'Gaegu', cursive",
               }}
             >
               <span style={{ color: PINK }}>파티는</span>
@@ -256,22 +237,19 @@ export default function PartyPage() {
               <div style={{ fontSize: 11, color: '#888', marginTop: 4 }}>bride</div>
             </div>
 
-            {/* Photo placeholder */}
-            <div
+            {/* Main photo */}
+            <img
+              src="/images/party-main.jpg"
+              alt="couple photo"
               style={{
                 width: 220,
                 height: 300,
                 borderRadius: 20,
-                background: 'linear-gradient(135deg, #FFB6D9 0%, #FFD6EC 50%, #FFC0CB 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                objectFit: 'cover',
                 boxShadow: '0 8px 32px rgba(255,105,180,0.3)',
                 flexShrink: 0,
               }}
-            >
-              <span style={{ fontSize: 48 }}>💑</span>
-            </div>
+            />
 
             {/* Groom name */}
             <div style={{ textAlign: 'center', paddingBottom: 16 }}>
@@ -354,65 +332,28 @@ export default function PartyPage() {
           <h2
             style={{
               fontSize: 36,
-              fontWeight: 900,
+              fontWeight: 700,
               color: PINK,
               letterSpacing: 12,
               margin: '0 0 32px',
+              fontFamily: "'Gaegu', cursive",
             }}
           >
             초 대 장
           </h2>
         </ScrollReveal>
 
-        {/* Group photo placeholder */}
+        {/* Letter icon */}
         <ScrollReveal direction="up" delay={0.1}>
-          <div style={{ position: 'relative', marginBottom: 32 }}>
-            <div
-              style={{
-                width: '100%',
-                height: 200,
-                borderRadius: 20,
-                background: 'linear-gradient(135deg, #FFD6EC 0%, #FFE4B5 50%, #FFB6D9 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 4px 20px rgba(255,105,180,0.2)',
-              }}
-            >
-              <span style={{ fontSize: 40 }}>🎊</span>
-            </div>
-            {/* Heart badges overlay */}
-            <HeartBadge
-              style={{
-                position: 'absolute',
-                bottom: -10,
-                left: '20%',
-                color: PINK,
-                backgroundColor: '#fff',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              }}
-            />
-            <HeartBadge
-              style={{
-                position: 'absolute',
-                bottom: -10,
-                left: '50%',
-                transform: 'translateX(-50%)',
-                color: RED,
-                backgroundColor: '#fff',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              }}
-            />
-            <HeartBadge
-              style={{
-                position: 'absolute',
-                bottom: -10,
-                right: '20%',
-                color: PINK,
-                backgroundColor: '#fff',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              }}
-            />
+          <div
+            style={{
+              marginBottom: 32,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <span style={{ fontSize: 64 }}>✉️</span>
           </div>
         </ScrollReveal>
 
@@ -440,6 +381,83 @@ export default function PartyPage() {
             </p>
           </div>
         </ScrollReveal>
+
+        <ScrollReveal direction="up" delay={0.3}>
+          <div
+            style={{
+              display: 'inline-flex',
+              gap: 10,
+              marginTop: 20,
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}
+          >
+            <a
+              href={`https://map.naver.com/p/search/${encodeURIComponent(partyData.location.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '7px 16px',
+                borderRadius: 999,
+                backgroundColor: PINK,
+                color: '#fff',
+                fontSize: 13,
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+            >
+              네이버지도
+            </a>
+            <a
+              href={`https://map.kakao.com/link/map/${encodeURIComponent(partyData.location.name)},${partyData.location.lat},${partyData.location.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '7px 16px',
+                borderRadius: 999,
+                backgroundColor: PINK,
+                color: '#fff',
+                fontSize: 13,
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
+            >
+              카카오지도
+            </a>
+            <a
+              href={`tmap://route?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = `tmap://route?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`;
+                setTimeout(() => {
+                  window.open(`https://tmap.life/navigate?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`, '_blank');
+                }, 1500);
+              }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '7px 16px',
+                borderRadius: 999,
+                backgroundColor: PINK,
+                color: '#fff',
+                fontSize: 13,
+                fontWeight: 600,
+                textDecoration: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              티맵
+            </a>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal direction="up" delay={0.4}>
+          <RsvpForm />
+        </ScrollReveal>
       </section>
 
       {/* ── NOTES SECTION ─────────────────────────────────────────── */}
@@ -449,9 +467,10 @@ export default function PartyPage() {
             <span
               style={{
                 fontSize: 28,
-                fontWeight: 900,
+                fontWeight: 700,
                 color: PINK,
                 display: 'block',
+                fontFamily: "'Gaegu', cursive",
               }}
             >
               유의사항
@@ -489,7 +508,7 @@ export default function PartyPage() {
                     marginTop: 1,
                   }}
                 >
-                  {circleNumbers[i]}
+                  {circleNumbers[i] ?? String(i + 1)}
                 </span>
                 <p
                   style={{
