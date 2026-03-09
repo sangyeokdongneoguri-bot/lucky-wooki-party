@@ -3,225 +3,166 @@ import { partyData } from '../data/party';
 import ScrollReveal from '../components/ScrollReveal';
 import useCountdown from '../hooks/useCountdown';
 import RsvpForm from '../components/RsvpForm';
+import Confetti from '../components/Confetti';
+import FloatingEmojis from '../components/FloatingEmojis';
+import Sparkles from '../components/Sparkles';
 
 const PINK = '#FF69B4';
 const RED = '#FF0000';
 const GOLD = '#B8960C';
-const LIGHT_BLUE = '#E0F4FF';
-
-// Cloud shape using CSS border-radius
-function Cloud({ style }: { style: React.CSSProperties }) {
-  return (
-    <div style={{ position: 'absolute', ...style }}>
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-        }}
-      >
-        {/* main body */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '10%',
-            width: '80%',
-            height: '60%',
-            backgroundColor: '#fff',
-            borderRadius: '50px',
-          }}
-        />
-        {/* left puff */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '35%',
-            left: '5%',
-            width: '45%',
-            height: '60%',
-            backgroundColor: '#fff',
-            borderRadius: '50%',
-          }}
-        />
-        {/* right puff */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '35%',
-            right: '5%',
-            width: '40%',
-            height: '55%',
-            backgroundColor: '#fff',
-            borderRadius: '50%',
-          }}
-        />
-        {/* center top puff */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '45%',
-            left: '30%',
-            width: '40%',
-            height: '65%',
-            backgroundColor: '#fff',
-            borderRadius: '50%',
-          }}
-        />
-      </div>
-    </div>
-  );
-}
-
-// Sun peeking from top-right
-function Sun() {
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        top: -40,
-        right: 30,
-        width: 120,
-        height: 120,
-        borderRadius: '50%',
-        backgroundColor: '#FFD700',
-        boxShadow: '0 0 30px 10px rgba(255,215,0,0.4)',
-        zIndex: 1,
-      }}
-    />
-  );
-}
+const MAGENTA = '#FF1493';
+const CORAL = '#FF6B6B';
 
 const circleNumbers = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧'];
 
 export default function PartyPage() {
   const countdown = useCountdown(partyData.dDay);
 
-  const containerStyle: React.CSSProperties = {
-    maxWidth: 480,
-    margin: '0 auto',
-    backgroundColor: '#fff',
-    fontFamily: "'Noto Sans KR', sans-serif",
-    overflowX: 'hidden',
-  };
-
-  // ── Hero Section ──────────────────────────────────────────────────
-  const heroStyle: React.CSSProperties = {
-    position: 'relative',
-    minHeight: '100vh',
-    backgroundColor: LIGHT_BLUE,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    padding: '80px 24px 48px',
-  };
-
-  // ── Info Section ──────────────────────────────────────────────────
-  const infoSectionStyle: React.CSSProperties = {
-    padding: '48px 24px',
-    backgroundColor: '#fff',
-    textAlign: 'center',
-  };
-
-  // ── Notes Section ─────────────────────────────────────────────────
-  const notesSectionStyle: React.CSSProperties = {
-    padding: '48px 24px',
-    backgroundColor: '#FFF0F8',
-    textAlign: 'center',
-  };
-
-  const noteCardStyle: React.CSSProperties = {
-    backgroundColor: PINK,
-    borderRadius: 24,
-    padding: '28px 24px',
-    textAlign: 'left',
-    marginTop: 24,
-  };
-
-  // ── Footer ────────────────────────────────────────────────────────
-  const footerStyle: React.CSSProperties = {
-    padding: '48px 24px 64px',
-    textAlign: 'center',
-    backgroundColor: '#fff',
-  };
-
   return (
-    <div style={containerStyle}>
+    <div
+      style={{
+        maxWidth: 480,
+        margin: '0 auto',
+        fontFamily: "'Noto Sans KR', sans-serif",
+        overflowX: 'hidden',
+        backgroundColor: '#fff',
+      }}
+    >
       {/* ── HERO ──────────────────────────────────────────────────── */}
-      <section style={heroStyle}>
-        {/* Sky background gradient overlay */}
+      <section
+        style={{
+          position: 'relative',
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          padding: '80px 24px 48px',
+        }}
+      >
+        {/* Animated gradient sky */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(180deg, #87CEEB 0%, #E0F4FF 40%, #fff 100%)',
+            background: 'linear-gradient(135deg, #667eea 0%, #87CEEB 20%, #FFB6C1 40%, #E0F4FF 60%, #ffecd2 80%, #fcb69f 100%)',
+            backgroundSize: '300% 300%',
+            animation: 'gradient-shift 12s ease infinite',
             zIndex: 0,
           }}
         />
 
-        {/* Sun */}
-        <div style={{ position: 'absolute', top: 0, right: 0, zIndex: 1, width: 140, height: 140 }}>
-          <Sun />
-        </div>
+        {/* Overlay for readability */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.7) 100%)',
+            zIndex: 1,
+          }}
+        />
 
-        {/* Clouds */}
-        <Cloud style={{ top: 10, left: -20, width: 180, height: 90, zIndex: 2 }} />
-        <Cloud style={{ top: 60, right: 20, width: 140, height: 70, zIndex: 2 }} />
-        <Cloud style={{ top: 120, left: 60, width: 120, height: 60, zIndex: 2 }} />
+        {/* Confetti */}
+        <Confetti count={35} />
+
+        {/* Sparkles */}
+        <Sparkles count={15} />
+
+        {/* Floating emojis */}
+        <FloatingEmojis count={10} />
 
         {/* Content */}
-        <div style={{ position: 'relative', zIndex: 3, width: '100%', textAlign: 'center' }}>
-          {/* Main title */}
+        <div style={{ position: 'relative', zIndex: 11, width: '100%', textAlign: 'center' }}>
+          {/* Main title with shimmer */}
           <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
+            initial={{ opacity: 0, y: -30, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <div
               style={{
-                fontSize: 42,
+                fontSize: 52,
                 fontWeight: 700,
-                lineHeight: 1.2,
+                lineHeight: 1.15,
                 marginBottom: 8,
                 letterSpacing: '-1px',
                 fontFamily: "'Gaegu', cursive",
               }}
             >
-              <span style={{ color: PINK }}>파티는</span>
+              <span
+                style={{
+                  background: `linear-gradient(90deg, ${PINK}, ${MAGENTA}, ${CORAL}, ${PINK})`,
+                  backgroundSize: '200% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  animation: 'shimmer 3s linear infinite',
+                  display: 'inline-block',
+                }}
+              >
+                파티는
+              </span>
               <br />
-              <span style={{ color: RED }}>핑계고</span>
+              <span
+                style={{
+                  background: `linear-gradient(90deg, ${RED}, #FF4500, ${CORAL}, ${RED})`,
+                  backgroundSize: '200% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  animation: 'shimmer 3s 0.5s linear infinite',
+                  display: 'inline-block',
+                }}
+              >
+                핑계고
+              </span>
             </div>
+          </motion.div>
+
+          {/* Party emoji row */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3, type: 'spring', stiffness: 200 }}
+            style={{ fontSize: 28, margin: '4px 0 8px', letterSpacing: 8 }}
+          >
+            🎉🥂🪩🥂🎉
           </motion.div>
 
           {/* Date subtitle */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
           >
             <p
               style={{
                 fontSize: 18,
                 fontWeight: 700,
                 color: '#333',
-                margin: '12px 0 32px',
+                margin: '8px 0 28px',
+                animation: 'text-glow 3s ease-in-out infinite',
               }}
             >
               4월 11일 토요일에 만나요!
             </p>
           </motion.div>
 
-          {/* Couple photo placeholder + names */}
+          {/* Couple photo + names */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
             style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: 16 }}
           >
             {/* Bride name */}
-            <div style={{ textAlign: 'center', paddingBottom: 16 }}>
+            <motion.div
+              initial={{ x: -40, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              style={{ textAlign: 'center', paddingBottom: 16 }}
+            >
               <div
                 style={{
                   fontSize: 22,
@@ -230,29 +171,46 @@ export default function PartyPage() {
                   writingMode: 'vertical-rl',
                   textOrientation: 'upright',
                   letterSpacing: 4,
+                  textShadow: `0 0 20px rgba(255,105,180,0.4)`,
                 }}
               >
                 {partyData.bride.name}
               </div>
               <div style={{ fontSize: 11, color: '#888', marginTop: 4 }}>bride</div>
-            </div>
+            </motion.div>
 
-            {/* Main photo */}
-            <img
-              src="/images/party-main.jpg"
-              alt="couple photo"
+            {/* Photo with glow frame */}
+            <div
               style={{
-                width: 220,
-                height: 300,
-                borderRadius: 20,
-                objectFit: 'cover',
-                boxShadow: '0 8px 32px rgba(255,105,180,0.3)',
+                position: 'relative',
+                borderRadius: 24,
+                padding: 3,
+                background: `linear-gradient(135deg, ${PINK}, ${MAGENTA}, #FFD700, ${CORAL}, ${PINK})`,
+                backgroundSize: '300% 300%',
+                animation: 'gradient-shift 4s ease infinite, pulse-glow 3s ease-in-out infinite',
                 flexShrink: 0,
               }}
-            />
+            >
+              <img
+                src="/images/party-main.jpg"
+                alt="couple photo"
+                style={{
+                  width: 220,
+                  height: 300,
+                  borderRadius: 21,
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+            </div>
 
             {/* Groom name */}
-            <div style={{ textAlign: 'center', paddingBottom: 16 }}>
+            <motion.div
+              initial={{ x: 40, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              style={{ textAlign: 'center', paddingBottom: 16 }}
+            >
               <div
                 style={{
                   fontSize: 22,
@@ -261,24 +219,25 @@ export default function PartyPage() {
                   writingMode: 'vertical-rl',
                   textOrientation: 'upright',
                   letterSpacing: 4,
+                  textShadow: `0 0 20px rgba(255,0,0,0.3)`,
                 }}
               >
                 {partyData.groom.name}
               </div>
               <div style={{ fontSize: 11, color: '#888', marginTop: 4 }}>groom</div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Countdown */}
           {!countdown.isExpired && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.9 }}
               style={{
                 marginTop: 32,
                 display: 'flex',
-                gap: 16,
+                gap: 12,
                 justifyContent: 'center',
               }}
             >
@@ -287,288 +246,387 @@ export default function PartyPage() {
                 { label: 'HRS', value: countdown.hours },
                 { label: 'MIN', value: countdown.minutes },
                 { label: 'SEC', value: countdown.seconds },
-              ].map(({ label, value }) => (
-                <div
+              ].map(({ label, value }, idx) => (
+                <motion.div
                   key={label}
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{
+                    duration: 1.5,
+                    delay: idx * 0.15,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
                   style={{
-                    backgroundColor: '#fff',
-                    borderRadius: 12,
-                    padding: '8px 12px',
-                    minWidth: 52,
-                    boxShadow: '0 2px 12px rgba(255,105,180,0.2)',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,240,248,0.95) 100%)',
+                    borderRadius: 16,
+                    padding: '10px 14px',
+                    minWidth: 58,
+                    boxShadow: `0 4px 20px rgba(255,105,180,0.25), 0 0 0 1px rgba(255,105,180,0.15)`,
+                    backdropFilter: 'blur(10px)',
                   }}
                 >
                   <div
                     style={{
-                      fontSize: 22,
+                      fontSize: 26,
                       fontWeight: 900,
-                      color: PINK,
+                      background: `linear-gradient(135deg, ${PINK}, ${MAGENTA})`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
                       lineHeight: 1,
                     }}
                   >
                     {String(value).padStart(2, '0')}
                   </div>
-                  <div style={{ fontSize: 9, color: '#aaa', marginTop: 2 }}>{label}</div>
-                </div>
+                  <div style={{ fontSize: 9, color: '#bbb', marginTop: 3, fontWeight: 600, letterSpacing: 1 }}>{label}</div>
+                </motion.div>
               ))}
             </motion.div>
           )}
           {countdown.isExpired && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.9 }}
-              style={{ marginTop: 24, fontSize: 16, color: PINK, fontWeight: 700 }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.9, type: 'spring' }}
+              style={{
+                marginTop: 28,
+                fontSize: 24,
+                fontWeight: 700,
+                animation: 'text-glow 2s ease-in-out infinite',
+              }}
             >
-              파티가 열렸어요! 🎉
-            </motion.p>
+              <span style={{ color: PINK }}>파티가 열렸어요!</span>
+              <span style={{ fontSize: 32, marginLeft: 8 }}>🎉</span>
+            </motion.div>
           )}
         </div>
       </section>
 
       {/* ── INFO SECTION ──────────────────────────────────────────── */}
-      <section style={infoSectionStyle}>
-        <ScrollReveal direction="up" delay={0}>
-          <h2
-            style={{
-              fontSize: 36,
-              fontWeight: 700,
-              color: PINK,
-              letterSpacing: 12,
-              margin: '0 0 32px',
-              fontFamily: "'Gaegu', cursive",
-            }}
-          >
-            초 대 장
-          </h2>
-        </ScrollReveal>
+      <section
+        style={{
+          position: 'relative',
+          padding: '56px 24px',
+          backgroundColor: '#fff',
+          textAlign: 'center',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Subtle animated bg */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            animation: 'disco-bg 8s ease infinite',
+            pointerEvents: 'none',
+          }}
+        />
 
-        {/* Letter icon */}
-        <ScrollReveal direction="up" delay={0.1}>
-          <div
-            style={{
-              marginBottom: 32,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <span style={{ fontSize: 64 }}>✉️</span>
-          </div>
-        </ScrollReveal>
-
-        {/* Event details */}
-        <ScrollReveal direction="up" delay={0.2}>
-          <div style={{ marginTop: 28, lineHeight: 2 }}>
-            <p style={{ fontSize: 17, fontWeight: 600, color: '#444', margin: '0 0 4px' }}>
-              4월 11일(토) {partyData.timeLabel}
-            </p>
-            <p
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <ScrollReveal direction="up" delay={0}>
+            <h2
               style={{
-                fontSize: 26,
-                fontWeight: 900,
-                color: '#111',
-                margin: '8px 0',
+                fontSize: 40,
+                fontWeight: 700,
+                letterSpacing: 14,
+                margin: '0 0 8px',
+                fontFamily: "'Gaegu', cursive",
+                background: `linear-gradient(90deg, ${PINK}, ${MAGENTA}, #FF4500, ${PINK})`,
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                animation: 'shimmer 4s linear infinite',
               }}
             >
-              {partyData.location.name}
-            </p>
-            <p style={{ fontSize: 14, color: '#666', margin: '4px 0' }}>
-              {partyData.location.address}
-            </p>
-            <p style={{ fontSize: 13, color: '#999', margin: '4px 0' }}>
-              ({partyData.location.transport})
-            </p>
-          </div>
-        </ScrollReveal>
+              초 대 장
+            </h2>
+            <div style={{ fontSize: 12, color: '#ccc', letterSpacing: 6, fontWeight: 500, marginBottom: 28 }}>
+              INVITATION
+            </div>
+          </ScrollReveal>
 
-        <ScrollReveal direction="up" delay={0.3}>
-          <div
-            style={{
-              display: 'inline-flex',
-              gap: 10,
-              marginTop: 20,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-            }}
-          >
-            <a
-              href={`https://map.naver.com/p/search/${encodeURIComponent(partyData.location.address)}`}
-              target="_blank"
-              rel="noopener noreferrer"
+          {/* Animated envelope */}
+          <ScrollReveal direction="up" delay={0.1}>
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                marginBottom: 32,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span style={{ fontSize: 72, filter: 'drop-shadow(0 4px 12px rgba(255,105,180,0.3))' }}>✉️</span>
+            </motion.div>
+          </ScrollReveal>
+
+          {/* Event details */}
+          <ScrollReveal direction="up" delay={0.2}>
+            <div style={{ marginTop: 20, lineHeight: 2 }}>
+              <p style={{ fontSize: 17, fontWeight: 600, color: '#444', margin: '0 0 4px' }}>
+                4월 11일(토) {partyData.timeLabel}
+              </p>
+              <p
+                style={{
+                  fontSize: 28,
+                  fontWeight: 900,
+                  color: '#111',
+                  margin: '8px 0',
+                  letterSpacing: 2,
+                }}
+              >
+                {partyData.location.name}
+              </p>
+              <p style={{ fontSize: 14, color: '#666', margin: '4px 0' }}>
+                {partyData.location.address}
+              </p>
+              <p style={{ fontSize: 13, color: '#999', margin: '4px 0' }}>
+                ({partyData.location.transport})
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Map buttons with gradient */}
+          <ScrollReveal direction="up" delay={0.3}>
+            <div
               style={{
                 display: 'inline-flex',
-                alignItems: 'center',
-                padding: '7px 16px',
-                borderRadius: 999,
-                backgroundColor: PINK,
-                color: '#fff',
-                fontSize: 13,
-                fontWeight: 600,
-                textDecoration: 'none',
+                gap: 10,
+                marginTop: 24,
+                flexWrap: 'wrap',
+                justifyContent: 'center',
               }}
             >
-              네이버지도
-            </a>
-            <a
-              href={`https://map.kakao.com/link/map/${encodeURIComponent(partyData.location.name)},${partyData.location.lat},${partyData.location.lng}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: '7px 16px',
-                borderRadius: 999,
-                backgroundColor: PINK,
-                color: '#fff',
-                fontSize: 13,
-                fontWeight: 600,
-                textDecoration: 'none',
-              }}
-            >
-              카카오지도
-            </a>
-            <a
-              href={`tmap://route?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`}
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = `tmap://route?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`;
-                setTimeout(() => {
-                  window.open(`https://tmap.life/navigate?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`, '_blank');
-                }, 1500);
-              }}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: '7px 16px',
-                borderRadius: 999,
-                backgroundColor: PINK,
-                color: '#fff',
-                fontSize: 13,
-                fontWeight: 600,
-                textDecoration: 'none',
-                cursor: 'pointer',
-              }}
-            >
-              티맵
-            </a>
-          </div>
-        </ScrollReveal>
+              {[
+                {
+                  label: '네이버지도',
+                  href: `https://map.naver.com/p/search/${encodeURIComponent(partyData.location.address)}`,
+                  gradient: `linear-gradient(135deg, ${PINK}, ${MAGENTA})`,
+                },
+                {
+                  label: '카카오지도',
+                  href: `https://map.kakao.com/link/map/${encodeURIComponent(partyData.location.name)},${partyData.location.lat},${partyData.location.lng}`,
+                  gradient: `linear-gradient(135deg, ${CORAL}, #FF4500)`,
+                },
+                {
+                  label: '티맵',
+                  href: `tmap://route?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`,
+                  gradient: `linear-gradient(135deg, #FFD700, #FFA500)`,
+                  isTmap: true,
+                },
+              ].map(({ label, href, gradient, isTmap }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={isTmap ? undefined : '_blank'}
+                  rel={isTmap ? undefined : 'noopener noreferrer'}
+                  onClick={
+                    isTmap
+                      ? (e) => {
+                          e.preventDefault();
+                          window.location.href = href;
+                          setTimeout(() => {
+                            window.open(
+                              `https://tmap.life/navigate?goalname=${encodeURIComponent(partyData.location.name)}&goalx=${partyData.location.lng}&goaly=${partyData.location.lat}`,
+                              '_blank',
+                            );
+                          }, 1500);
+                        }
+                      : undefined
+                  }
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '9px 20px',
+                    borderRadius: 999,
+                    background: gradient,
+                    color: '#fff',
+                    fontSize: 13,
+                    fontWeight: 700,
+                    textDecoration: 'none',
+                    boxShadow: '0 4px 14px rgba(255,105,180,0.3)',
+                    transition: 'transform 0.2s, box-shadow 0.2s',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </ScrollReveal>
 
-        <ScrollReveal direction="up" delay={0.4}>
-          <RsvpForm />
-        </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.4}>
+            <RsvpForm />
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* ── NOTES SECTION ─────────────────────────────────────────── */}
-      <section style={notesSectionStyle}>
-        <ScrollReveal direction="up" delay={0}>
-          <div style={{ marginBottom: 8 }}>
-            <span
-              style={{
-                fontSize: 28,
-                fontWeight: 700,
-                color: PINK,
-                display: 'block',
-                fontFamily: "'Gaegu', cursive",
-              }}
-            >
-              유의사항
-            </span>
-            <span
-              style={{
-                fontSize: 16,
-                fontStyle: 'italic',
-                color: '#C06090',
-                fontFamily: 'Georgia, serif',
-              }}
-            >
-              Pre-Wedding party
-            </span>
-          </div>
-        </ScrollReveal>
+      <section
+        style={{
+          position: 'relative',
+          padding: '56px 24px',
+          textAlign: 'center',
+          overflow: 'hidden',
+          background: 'linear-gradient(180deg, #FFF5FA 0%, #FFF0F8 50%, #FFE8F5 100%)',
+        }}
+      >
+        {/* Floating emojis in notes section too */}
+        <FloatingEmojis count={6} />
 
-        <ScrollReveal direction="up" delay={0.15}>
-          <div style={noteCardStyle}>
-            {partyData.notes.map((note, i) => (
-              <div
-                key={i}
+        <div style={{ position: 'relative', zIndex: 2 }}>
+          <ScrollReveal direction="up" delay={0}>
+            <div style={{ marginBottom: 8 }}>
+              <span
                 style={{
-                  display: 'flex',
-                  gap: 10,
-                  marginBottom: i < partyData.notes.length - 1 ? 16 : 0,
-                  alignItems: 'flex-start',
+                  fontSize: 32,
+                  fontWeight: 700,
+                  display: 'block',
+                  fontFamily: "'Gaegu', cursive",
+                  background: `linear-gradient(90deg, ${PINK}, ${MAGENTA})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  animation: 'text-glow 3s ease-in-out infinite',
                 }}
               >
-                <span
-                  style={{
-                    fontSize: 18,
-                    color: '#fff',
-                    flexShrink: 0,
-                    marginTop: 1,
-                  }}
-                >
-                  {circleNumbers[i] ?? String(i + 1)}
-                </span>
-                <p
-                  style={{
-                    fontSize: 13,
-                    color: '#fff',
-                    fontWeight: 500,
-                    lineHeight: 1.65,
-                    margin: 0,
-                  }}
-                >
-                  {note}
-                </p>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
+                유의사항
+              </span>
+              <span
+                style={{
+                  fontSize: 16,
+                  fontStyle: 'italic',
+                  color: '#C06090',
+                  fontFamily: 'Georgia, serif',
+                }}
+              >
+                Pre-Wedding party
+              </span>
+            </div>
+          </ScrollReveal>
 
-        <ScrollReveal direction="up" delay={0.25}>
-          <p
-            style={{
-              fontSize: 13,
-              color: '#888',
-              marginTop: 24,
-              lineHeight: 1.7,
-            }}
-          >
-            {partyData.closingNote}
-          </p>
-          <p
-            style={{
-              fontSize: 14,
-              fontWeight: 700,
-              color: GOLD,
-              marginTop: 12,
-              fontFamily: 'Georgia, serif',
-              letterSpacing: 0.5,
-            }}
-          >
-            {partyData.groom.fullNameEn} &amp; {partyData.bride.fullNameEn}
-          </p>
-        </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.15}>
+            <div
+              style={{
+                background: `linear-gradient(135deg, ${PINK}, ${MAGENTA}, ${CORAL})`,
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 6s ease infinite',
+                borderRadius: 28,
+                padding: '32px 24px',
+                textAlign: 'left',
+                marginTop: 24,
+                boxShadow: `0 8px 32px rgba(255,105,180,0.3), 0 0 0 1px rgba(255,255,255,0.2) inset`,
+              }}
+            >
+              {partyData.notes.map((note, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    gap: 10,
+                    marginBottom: i < partyData.notes.length - 1 ? 18 : 0,
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 18,
+                      color: 'rgba(255,255,255,0.9)',
+                      flexShrink: 0,
+                      marginTop: 1,
+                      textShadow: '0 1px 4px rgba(0,0,0,0.1)',
+                    }}
+                  >
+                    {circleNumbers[i] ?? String(i + 1)}
+                  </span>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: '#fff',
+                      fontWeight: 500,
+                      lineHeight: 1.7,
+                      margin: 0,
+                      textShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                    }}
+                  >
+                    {note}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={0.25}>
+            <p
+              style={{
+                fontSize: 13,
+                color: '#888',
+                marginTop: 28,
+                lineHeight: 1.7,
+              }}
+            >
+              {partyData.closingNote}
+            </p>
+            <p
+              style={{
+                fontSize: 15,
+                fontWeight: 700,
+                marginTop: 14,
+                fontFamily: 'Georgia, serif',
+                letterSpacing: 0.5,
+                background: `linear-gradient(90deg, ${GOLD}, #D4A017, ${GOLD})`,
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                animation: 'shimmer 4s linear infinite',
+              }}
+            >
+              {partyData.groom.fullNameEn} &amp; {partyData.bride.fullNameEn}
+            </p>
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* ── FOOTER ────────────────────────────────────────────────── */}
-      <footer style={footerStyle}>
+      <footer
+        style={{
+          position: 'relative',
+          padding: '56px 24px 72px',
+          textAlign: 'center',
+          background: 'linear-gradient(180deg, #fff 0%, #FFF5FA 100%)',
+          overflow: 'hidden',
+        }}
+      >
+        <Sparkles count={10} />
         <ScrollReveal direction="up" delay={0}>
-          <p
+          <motion.p
+            animate={{ scale: [1, 1.02, 1] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             style={{
-              fontSize: 20,
+              position: 'relative',
+              zIndex: 1,
+              fontSize: 22,
               fontWeight: 900,
-              background: `linear-gradient(90deg, ${PINK}, ${RED})`,
+              background: `linear-gradient(90deg, ${PINK}, ${RED}, ${MAGENTA}, ${PINK})`,
+              backgroundSize: '200% auto',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              lineHeight: 1.5,
+              animation: 'shimmer 3s linear infinite',
+              lineHeight: 1.6,
               margin: 0,
             }}
           >
             청첩장파티에 초대되신 여러분 환영합니다.
-          </p>
+          </motion.p>
+        </ScrollReveal>
+        <ScrollReveal direction="up" delay={0.2}>
+          <div style={{ marginTop: 20, fontSize: 32, letterSpacing: 12 }}>
+            🎊✨🥂✨🎊
+          </div>
         </ScrollReveal>
       </footer>
     </div>
