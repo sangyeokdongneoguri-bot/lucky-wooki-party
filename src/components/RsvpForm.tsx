@@ -95,10 +95,10 @@ export default function RsvpForm() {
         }}
       >
         <div style={{ fontSize: 40, marginBottom: 12 }}>💌</div>
-        <p style={{ fontSize: 17, fontWeight: 700, color: PINK, margin: 0 }}>
+        <p style={{ fontSize: 18, color: PINK, margin: 0 }}>
           참석 여부가 전달되었어요!
         </p>
-        <p style={{ fontSize: 13, color: '#999', marginTop: 8 }}>
+        <p style={{ fontSize: 14, color: '#999', marginTop: 8 }}>
           소중한 응답 감사해요 :)
         </p>
         <button
@@ -109,7 +109,7 @@ export default function RsvpForm() {
           }}
           style={{
             marginTop: 16,
-            fontSize: 12,
+            fontSize: 13,
             color: '#ccc',
             background: 'none',
             border: 'none',
@@ -128,7 +128,7 @@ export default function RsvpForm() {
     padding: '10px 12px',
     borderRadius: 10,
     border: '1.5px solid #f0b8d8',
-    fontSize: 14,
+    fontSize: 15,
     outline: 'none',
     boxSizing: 'border-box',
     fontFamily: "'Saenggeo Jincheon', sans-serif",
@@ -146,7 +146,7 @@ export default function RsvpForm() {
     padding: '10px 14px',
     borderRadius: 10,
     border: '1.5px solid #f0b8d8',
-    fontSize: 14,
+    fontSize: 15,
     outline: 'none',
     boxSizing: 'border-box',
     fontFamily: "'Saenggeo Jincheon', sans-serif",
@@ -156,15 +156,14 @@ export default function RsvpForm() {
     display: 'flex',
     alignItems: 'center',
     gap: 8,
-    fontSize: 14,
+    fontSize: 15,
     color: '#333',
     cursor: 'pointer',
     padding: '6px 0',
   };
 
   const sectionLabelStyle: React.CSSProperties = {
-    fontSize: 13,
-    fontWeight: 700,
+    fontSize: 14,
     color: '#888',
     marginBottom: 8,
     display: 'block',
@@ -193,8 +192,7 @@ export default function RsvpForm() {
     >
       <p
         style={{
-          fontSize: 18,
-          fontWeight: 900,
+          fontSize: 20,
           color: PINK,
           margin: '0 0 20px',
           textAlign: 'center',
@@ -247,7 +245,7 @@ export default function RsvpForm() {
           {/* Time range selectors */}
           {form.attendance === 'partial' && (
             <div style={{ marginTop: 12, paddingLeft: 24 }}>
-              <div style={{ fontSize: 12, color: '#999', marginBottom: 8 }}>
+              <div style={{ fontSize: 13, color: '#999', marginBottom: 8 }}>
                 참석 가능한 시간대를 선택해 주세요
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -307,7 +305,7 @@ export default function RsvpForm() {
         </div>
 
         {error && (
-          <p style={{ fontSize: 13, color: '#e53935', margin: 0 }}>{error}</p>
+          <p style={{ fontSize: 14, color: '#e53935', margin: 0 }}>{error}</p>
         )}
 
         <button
@@ -318,8 +316,7 @@ export default function RsvpForm() {
             borderRadius: 12,
             backgroundColor: isValid && !loading ? PINK : '#f0b8d8',
             color: '#fff',
-            fontSize: 15,
-            fontWeight: 700,
+            fontSize: 16,
             border: 'none',
             cursor: isValid && !loading ? 'pointer' : 'not-allowed',
             fontFamily: "'Saenggeo Jincheon', sans-serif",

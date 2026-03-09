@@ -101,8 +101,7 @@ export default function PartyPage() {
           >
             <p
               style={{
-                fontSize: 18,
-                fontWeight: 700,
+                fontSize: 20,
                 color: '#333',
                 margin: '8px 0 28px',
                 animation: 'text-glow 3s ease-in-out infinite',
@@ -139,7 +138,7 @@ export default function PartyPage() {
               >
                 {partyData.bride.name}
               </div>
-              <div style={{ fontSize: 11, color: '#888', marginTop: 4 }}>bride</div>
+              <div style={{ fontSize: 13, color: '#888', marginTop: 4 }}>bride</div>
             </motion.div>
 
             {/* Photo with glow frame */}
@@ -187,7 +186,7 @@ export default function PartyPage() {
               >
                 {partyData.groom.name}
               </div>
-              <div style={{ fontSize: 11, color: '#888', marginTop: 4 }}>groom</div>
+              <div style={{ fontSize: 13, color: '#888', marginTop: 4 }}>groom</div>
             </motion.div>
           </motion.div>
 
@@ -241,7 +240,7 @@ export default function PartyPage() {
                   >
                     {String(value).padStart(2, '0')}
                   </div>
-                  <div style={{ fontSize: 9, color: '#bbb', marginTop: 3, fontWeight: 600, letterSpacing: 1 }}>{label}</div>
+                  <div style={{ fontSize: 11, color: '#bbb', marginTop: 3, letterSpacing: 1 }}>{label}</div>
                 </motion.div>
               ))}
             </motion.div>
@@ -304,7 +303,7 @@ export default function PartyPage() {
             >
               초 대 장
             </h2>
-            <div style={{ fontSize: 12, color: '#ccc', letterSpacing: 6, fontWeight: 500, marginBottom: 28 }}>
+            <div style={{ fontSize: 14, color: '#ccc', letterSpacing: 6, marginBottom: 28 }}>
               INVITATION
             </div>
           </ScrollReveal>
@@ -328,7 +327,7 @@ export default function PartyPage() {
           {/* Event details */}
           <ScrollReveal direction="up" delay={0.2}>
             <div style={{ marginTop: 20, lineHeight: 2 }}>
-              <p style={{ fontSize: 17, fontWeight: 600, color: '#444', margin: '0 0 4px' }}>
+              <p style={{ fontSize: 18, color: '#444', margin: '0 0 4px' }}>
                 4월 11일(토) {partyData.timeLabel}
               </p>
               <p
@@ -342,10 +341,10 @@ export default function PartyPage() {
               >
                 {partyData.location.name}
               </p>
-              <p style={{ fontSize: 14, color: '#666', margin: '4px 0' }}>
+              <p style={{ fontSize: 15, color: '#666', margin: '4px 0' }}>
                 {partyData.location.address}
               </p>
-              <p style={{ fontSize: 13, color: '#999', margin: '4px 0' }}>
+              <p style={{ fontSize: 14, color: '#999', margin: '4px 0' }}>
                 ({partyData.location.transport})
               </p>
             </div>
@@ -386,8 +385,7 @@ export default function PartyPage() {
                     borderRadius: 999,
                     background: gradient,
                     color: '#fff',
-                    fontSize: 13,
-                    fontWeight: 700,
+                    fontSize: 14,
                     textDecoration: 'none',
                     boxShadow: '0 4px 14px rgba(255,105,180,0.3)',
                     transition: 'transform 0.2s, box-shadow 0.2s',
@@ -475,22 +473,20 @@ export default function PartyPage() {
                 >
                   <span
                     style={{
-                      fontSize: 13,
-                      lineHeight: 1.7,
+                      fontSize: 15,
+                      lineHeight: 1.8,
                       color: 'rgba(255,255,255,0.9)',
                       flexShrink: 0,
                       textShadow: '0 1px 4px rgba(0,0,0,0.1)',
-                      fontWeight: 700,
                     }}
                   >
                     {circleNumbers[i] ?? String(i + 1)}
                   </span>
                   <p
                     style={{
-                      fontSize: 13,
+                      fontSize: 15,
                       color: '#fff',
-                      fontWeight: 500,
-                      lineHeight: 1.7,
+                      lineHeight: 1.8,
                       margin: 0,
                       textShadow: '0 1px 2px rgba(0,0,0,0.05)',
                     }}
@@ -505,18 +501,17 @@ export default function PartyPage() {
           <ScrollReveal direction="up" delay={0.25}>
             <p
               style={{
-                fontSize: 13,
+                fontSize: 15,
                 color: '#888',
                 marginTop: 28,
-                lineHeight: 1.7,
+                lineHeight: 1.8,
               }}
             >
               {partyData.closingNote}
             </p>
             <p
               style={{
-                fontSize: 15,
-                fontWeight: 700,
+                fontSize: 16,
                 marginTop: 14,
                 fontFamily: "'Saenggeo Jincheon', sans-serif",
                 letterSpacing: 0.5,
