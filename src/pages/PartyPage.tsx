@@ -88,7 +88,6 @@ export default function PartyPage() {
                 maxWidth: '80%',
                 margin: '0 auto',
                 display: 'block',
-                mixBlendMode: 'multiply',
                 filter: 'drop-shadow(0 4px 20px rgba(255,105,180,0.4))',
               }}
             />
