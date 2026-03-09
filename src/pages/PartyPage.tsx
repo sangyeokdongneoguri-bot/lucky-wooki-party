@@ -81,7 +81,7 @@ export default function PartyPage() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <img
-              src="/images/pinggyego.gif"
+              src="/images/pinggyego2.gif"
               alt="파티는 핑계고"
               style={{
                 width: 280,
