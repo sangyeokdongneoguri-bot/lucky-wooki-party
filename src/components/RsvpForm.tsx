@@ -101,6 +101,24 @@ export default function RsvpForm() {
         <p style={{ fontSize: 13, color: '#999', marginTop: 8 }}>
           소중한 응답 감사해요 :)
         </p>
+        <button
+          type="button"
+          onClick={() => {
+            localStorage.removeItem(STORAGE_KEY);
+            setSubmitted(false);
+          }}
+          style={{
+            marginTop: 16,
+            fontSize: 12,
+            color: '#ccc',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            textDecoration: 'underline',
+          }}
+        >
+          다시 제출하기
+        </button>
       </div>
     );
   }
