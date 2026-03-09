@@ -74,50 +74,23 @@ export default function PartyPage() {
 
         {/* Content */}
         <div style={{ position: 'relative', zIndex: 11, width: '100%', textAlign: 'center' }}>
-          {/* Main title with shimmer */}
+          {/* Main title GIF */}
           <motion.div
             initial={{ opacity: 0, y: -30, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <div
+            <img
+              src="/images/pinggyego.gif"
+              alt="파티는 핑계고"
               style={{
-                fontSize: 52,
-                fontWeight: 700,
-                lineHeight: 1.15,
-                marginBottom: 8,
-                letterSpacing: '-1px',
-                fontFamily: "'Gaegu', cursive",
+                width: 280,
+                maxWidth: '80%',
+                margin: '0 auto',
+                display: 'block',
+                filter: 'drop-shadow(0 4px 20px rgba(255,105,180,0.4))',
               }}
-            >
-              <span
-                style={{
-                  background: `linear-gradient(90deg, ${PINK}, ${MAGENTA}, ${CORAL}, ${PINK})`,
-                  backgroundSize: '200% auto',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  animation: 'shimmer 3s linear infinite',
-                  display: 'inline-block',
-                }}
-              >
-                파티는
-              </span>
-              <br />
-              <span
-                style={{
-                  background: `linear-gradient(90deg, ${RED}, #FF4500, ${CORAL}, ${RED})`,
-                  backgroundSize: '200% auto',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  animation: 'shimmer 3s 0.5s linear infinite',
-                  display: 'inline-block',
-                }}
-              >
-                핑계고
-              </span>
-            </div>
+            />
           </motion.div>
 
           {/* Party emoji row */}
