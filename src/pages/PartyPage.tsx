@@ -80,9 +80,12 @@ export default function PartyPage() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <img
-              src="/images/pinggyego2.gif"
-              alt="파티는 핑계고"
+            <video
+              src="/images/chicken-walk.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
               style={{
                 width: 280,
                 maxWidth: '80%',
