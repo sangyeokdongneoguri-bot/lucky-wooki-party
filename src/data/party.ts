@@ -10,11 +10,11 @@ export const partyData = {
     fullNameEn: 'Lee Soyeon',
   },
   title: '파티는 핑계고',
-  date: '2025-04-11',
+  date: '2026-04-11',
   day: '토요일',
   time: '17:30',
   timeLabel: '오후 5시 30분부터',
-  dDay: new Date('2025-04-11T17:30:00+09:00'),
+  dDay: new Date('2026-04-11T17:30:00+09:00'),
   location: {
     name: '벨지움재즈카페',
     address: '서울 강남구 테헤란로83길 20 건영빌딩',
