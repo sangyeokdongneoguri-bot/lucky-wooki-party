@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { partyData } from '../data/party';
 import ScrollReveal from '../components/ScrollReveal';
 import useCountdown from '../hooks/useCountdown';
@@ -15,9 +14,8 @@ const BODY_FONT =
 
 function ScrollIndicator() {
   return (
-    <motion.div
-      animate={{ y: [0, 8, 0] }}
-      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+    <div
+      className="anim-bounce-scroll"
       style={{
         position: 'relative',
         zIndex: 11,
@@ -42,7 +40,7 @@ function ScrollIndicator() {
           strokeLinejoin="round"
         />
       </svg>
-    </motion.div>
+    </div>
   );
 }
 
@@ -137,29 +135,30 @@ export default function PartyPage() {
           }}
         >
           {/* Main title GIF */}
-          <motion.div
-            initial={{ opacity: 0, y: -30, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+          <div
+            className="hero-enter-scale"
+            style={{ '--duration': '0.8s' } as React.CSSProperties}
           >
-            <img
-              src="/images/pinggyego.gif"
-              alt="파티는 핑계고"
-              style={{
-                width: 280,
-                maxWidth: '80%',
-                margin: '0 auto',
-                display: 'block',
-                filter: 'drop-shadow(0 4px 20px rgba(255,105,180,0.4))',
-              }}
-            />
-          </motion.div>
+            <picture>
+              <source srcSet="/images/pinggyego.webp" type="image/webp" />
+              <img
+                src="/images/pinggyego.gif"
+                alt="파티는 핑계고"
+                style={{
+                  width: 280,
+                  maxWidth: '80%',
+                  margin: '0 auto',
+                  display: 'block',
+                  filter: 'drop-shadow(0 4px 20px rgba(255,105,180,0.4))',
+                }}
+              />
+            </picture>
+          </div>
 
           {/* Date subtitle */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
+          <div
+            className="hero-enter"
+            style={{ '--delay': '0.4s', '--duration': '0.7s' } as React.CSSProperties}
           >
             <p
               style={{
@@ -171,18 +170,18 @@ export default function PartyPage() {
             >
               4월 11일 토요일에 만나요!
             </p>
-          </motion.div>
+          </div>
 
           {/* Couple photo + names below */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+          <div
+            className="hero-enter"
             style={{
+              '--delay': '0.5s',
+              '--duration': '0.8s',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-            }}
+            } as React.CSSProperties}
           >
             {/* Photo with gradient frame — single animation */}
             <div
@@ -194,31 +193,34 @@ export default function PartyPage() {
                 animation: 'gradient-shift 4s ease infinite',
               }}
             >
-              <img
-                src="/images/party-main.jpg"
-                alt="couple photo"
-                style={{
-                  width: '60vw',
-                  maxWidth: 240,
-                  aspectRatio: '11 / 15',
-                  borderRadius: 21,
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
-              />
+              <picture>
+                <source srcSet="/images/party-main.webp" type="image/webp" />
+                <img
+                  src="/images/party-main.jpg"
+                  alt="couple photo"
+                  style={{
+                    width: '60vw',
+                    maxWidth: 240,
+                    aspectRatio: '11 / 15',
+                    borderRadius: 21,
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+              </picture>
             </div>
 
             {/* Names below photo — horizontal */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
+            <div
+              className="hero-enter"
               style={{
+                '--delay': '0.7s',
+                '--duration': '0.6s',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 12,
                 marginTop: 16,
-              }}
+              } as React.CSSProperties}
             >
               <div>
                 <span
@@ -259,21 +261,21 @@ export default function PartyPage() {
                   groom
                 </span>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Countdown — no bounce */}
           {!countdown.isExpired && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.9 }}
+            <div
+              className="hero-enter"
               style={{
+                '--delay': '0.9s',
+                '--duration': '0.7s',
                 marginTop: 32,
                 display: 'flex',
                 gap: 12,
                 justifyContent: 'center',
-              }}
+              } as React.CSSProperties}
             >
               {[
                 { label: 'DAY', value: countdown.days },
@@ -320,32 +322,30 @@ export default function PartyPage() {
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </div>
           )}
           {countdown.isExpired && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.9, type: 'spring' }}
+            <div
+              className="hero-enter-spring"
               style={{
+                '--delay': '0.9s',
+                '--duration': '0.7s',
                 marginTop: 28,
                 fontSize: 24,
                 fontWeight: 700,
                 fontFamily: TITLE_FONT,
-              }}
+              } as React.CSSProperties}
             >
               <span style={{ color: PINK }}>파티가 열렸어요!</span>
               <span style={{ fontSize: 32, marginLeft: 8 }}>🎉</span>
-            </motion.div>
+            </div>
           )}
 
           {/* CTA to RSVP — only before event */}
           {!countdown.isExpired && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.1 }}
-              style={{ marginTop: 24 }}
+            <div
+              className="hero-enter"
+              style={{ '--delay': '1.1s', '--duration': '0.7s', marginTop: 24 } as React.CSSProperties}
             >
               <button
                 onClick={scrollToRsvp}
@@ -365,7 +365,7 @@ export default function PartyPage() {
               >
                 참석 응답하기 💕
               </button>
-            </motion.div>
+            </div>
           )}
         </div>
 
@@ -414,9 +414,8 @@ export default function PartyPage() {
 
         {/* Animated envelope */}
         <ScrollReveal direction="up" delay={0.1}>
-          <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          <div
+            className="anim-bounce-envelope"
             style={{
               marginBottom: 32,
               display: 'flex',
@@ -446,7 +445,7 @@ export default function PartyPage() {
                 }}
               />
             </div>
-          </motion.div>
+          </div>
         </ScrollReveal>
 
         {/* Event details */}
@@ -710,9 +709,8 @@ export default function PartyPage() {
         }}
       >
         <ScrollReveal direction="up" delay={0}>
-          <motion.p
-            animate={{ scale: [1, 1.02, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          <p
+            className="anim-pulse-scale"
             style={{
               position: 'relative',
               zIndex: 1,
@@ -730,7 +728,7 @@ export default function PartyPage() {
             }}
           >
             청첩장파티에 초대되신 여러분 환영합니다.
-          </motion.p>
+          </p>
         </ScrollReveal>
 
         {/* Monogram */}

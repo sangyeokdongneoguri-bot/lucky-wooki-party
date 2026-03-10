@@ -1,5 +1,4 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -9,24 +8,12 @@ interface ScrollRevealProps {
   className?: string;
 }
 
-const getInitial = (direction: ScrollRevealProps['direction']) => {
-  switch (direction) {
-    case 'up':    return { opacity: 0, y: 40 };
-    case 'down':  return { opacity: 0, y: -40 };
-    case 'left':  return { opacity: 0, x: 40 };
-    case 'right': return { opacity: 0, x: -40 };
-    case 'none':  return { opacity: 0 };
-    default:      return { opacity: 0, y: 40 };
-  }
-};
-
-const getAnimate = (direction: ScrollRevealProps['direction']) => {
-  switch (direction) {
-    case 'left':
-    case 'right': return { opacity: 1, x: 0 };
-    case 'none':  return { opacity: 1 };
-    default:      return { opacity: 1, y: 0 };
-  }
+const directionClass: Record<string, string> = {
+  up: 'fade-in-up',
+  down: 'fade-in-down',
+  left: 'fade-in-left',
+  right: 'fade-in-right',
+  none: 'fade-in',
 };
 
 export default function ScrollReveal({
@@ -37,17 +24,39 @@ export default function ScrollReveal({
   className,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const cls = [directionClass[direction] || 'fade-in-up', visible && 'animate-in', className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      className={className}
-      initial={getInitial(direction)}
-      animate={isInView ? getAnimate(direction) : getInitial(direction)}
-      transition={{ duration, delay, ease: 'easeOut' }}
+      className={cls}
+      style={
+        { '--delay': `${delay}s`, '--duration': `${duration}s` } as React.CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
