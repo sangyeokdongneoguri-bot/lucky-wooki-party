@@ -3,6 +3,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import useCountdown from '../hooks/useCountdown';
 import RsvpForm from '../components/RsvpForm';
 import Confetti from '../components/Confetti';
+import FloatingEmojis from '../components/FloatingEmojis';
 
 const PINK = '#FF69B4';
 const MAGENTA = '#FF1493';
@@ -101,6 +102,9 @@ export default function PartyPage() {
 
         {/* Confetti — reduced */}
         <Confetti count={20} />
+
+        {/* Floating emojis */}
+        <FloatingEmojis count={6} />
 
         {/* Wave at bottom of hero */}
         <div
@@ -577,6 +581,9 @@ export default function PartyPage() {
             'linear-gradient(180deg, #FFF5FA 0%, #FFF0F8 50%, #FFE8F5 100%)',
         }}
       >
+        {/* Floating emojis in notes section too */}
+        <FloatingEmojis count={4} />
+
         <div style={{ position: 'relative', zIndex: 2 }}>
           <ScrollReveal direction="up" delay={0}>
             <div style={{ marginBottom: 24 }}>
