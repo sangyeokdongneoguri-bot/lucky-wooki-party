@@ -86,9 +86,8 @@ export default function RsvpForm() {
     return (
       <div
         style={{
-          marginTop: 36,
           padding: '32px 24px',
-          backgroundColor: '#FFF0F8',
+          backgroundColor: '#fff',
           borderRadius: 20,
           textAlign: 'center',
           border: `2px solid ${PINK}`,
@@ -182,9 +181,8 @@ export default function RsvpForm() {
   return (
     <div
       style={{
-        marginTop: 36,
         padding: '28px 20px',
-        backgroundColor: '#FFF0F8',
+        backgroundColor: '#fff',
         borderRadius: 20,
         border: `2px solid ${PINK}`,
         textAlign: 'left',
