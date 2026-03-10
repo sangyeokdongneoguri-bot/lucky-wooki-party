@@ -140,9 +140,9 @@ export default function PartyPage() {
             style={{ '--duration': '0.8s' } as React.CSSProperties}
           >
             <picture>
-              <source srcSet="/images/pinggyego.webp" type="image/webp" />
+              <source srcSet="/images/main.webp" type="image/webp" />
               <img
-                src="/images/pinggyego.gif"
+                src="/images/main-opt.png"
                 alt="파티는 핑계고"
                 style={{
                   width: 280,
