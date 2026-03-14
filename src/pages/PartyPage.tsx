@@ -599,17 +599,7 @@ export default function PartyPage() {
                   backgroundClip: 'text',
                 }}
               >
-                유의사항
-              </span>
-              <span
-                style={{
-                  fontSize: 16,
-                  fontStyle: 'italic',
-                  color: '#C06090',
-                  fontFamily: TITLE_FONT,
-                }}
-              >
-                Pre-Wedding party
+                안내사항
               </span>
             </div>
           </ScrollReveal>
