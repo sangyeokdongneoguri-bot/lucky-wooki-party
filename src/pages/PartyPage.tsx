@@ -143,20 +143,17 @@ export default function PartyPage() {
             className="hero-enter-scale"
             style={{ '--duration': '0.8s' } as React.CSSProperties}
           >
-            <picture>
-              <source srcSet="/images/main.webp" type="image/webp" />
-              <img
-                src="/images/main-opt.png"
-                alt="파티는 핑계고"
-                style={{
-                  width: 280,
-                  maxWidth: '80%',
-                  margin: '0 auto',
-                  display: 'block',
-                  filter: 'drop-shadow(0 4px 20px rgba(255,105,180,0.4))',
-                }}
-              />
-            </picture>
+            <img
+              src="/images/main.gif"
+              alt="파티는 핑계고"
+              style={{
+                width: 280,
+                maxWidth: '80%',
+                margin: '0 auto',
+                display: 'block',
+                filter: 'drop-shadow(0 4px 20px rgba(255,105,180,0.4))',
+              }}
+            />
           </div>
 
           {/* Date subtitle */}
