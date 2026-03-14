@@ -58,6 +58,20 @@ img {
   }
 }
 
+@keyframes confetti-burst {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80vh) rotate(540deg) scale(0.3);
+    opacity: 0;
+  }
+}
+
 @keyframes confetti-sway {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(30px); }

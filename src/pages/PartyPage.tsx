@@ -82,7 +82,7 @@ export default function PartyPage() {
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(135deg, #667eea 0%, #87CEEB 20%, #FFB6C1 40%, #E0F4FF 60%, #ffecd2 80%, #fcb69f 100%)',
+              'linear-gradient(135deg, #FF69B4 0%, #FF1493 20%, #DA70D6 40%, #FFB6C1 60%, #FF85C0 80%, #E0BBE4 100%)',
             backgroundSize: '300% 300%',
             animation: 'gradient-shift 12s ease infinite',
             zIndex: 0,
@@ -101,7 +101,7 @@ export default function PartyPage() {
         />
 
         {/* Confetti — reduced */}
-        <Confetti count={20} />
+        <Confetti count={35} />
 
         {/* Floating emojis */}
         <FloatingEmojis count={6} />

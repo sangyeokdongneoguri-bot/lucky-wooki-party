@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Confetti from './Confetti';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw73Z2SCqK6_MvDNKJk_gz3AX8_Tel0gJQq5Lx2yzd60g530Cy4V97ny_fq5MhDcc4ohg/exec';
 
@@ -7,7 +8,6 @@ const STORAGE_KEY = 'rsvp_submitted';
 
 type Side = 'bride' | 'groom' | '';
 
-const PLACEHOLDER_NAMES = ['성기욱', '이소연'] as const;
 
 interface FormState {
   name: string;
@@ -21,9 +21,6 @@ export default function RsvpForm() {
     side: '',
     relation: '',
   });
-  const [placeholderName] = useState(
-    () => PLACEHOLDER_NAMES[Math.random() < 0.5 ? 0 : 1],
-  );
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(() => {
     try {
@@ -33,6 +30,14 @@ export default function RsvpForm() {
     }
   });
   const [error, setError] = useState('');
+  const [showBurst, setShowBurst] = useState(false);
+
+  useEffect(() => {
+    if (showBurst) {
+      const timer = setTimeout(() => setShowBurst(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showBurst]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,6 +62,7 @@ export default function RsvpForm() {
         body: JSON.stringify(payload),
       });
       localStorage.setItem(STORAGE_KEY, 'true');
+      setShowBurst(true);
       setSubmitted(true);
     } catch {
       setError('제출 중 오류가 발생했습니다. 다시 시도해 주세요.');
@@ -69,13 +75,16 @@ export default function RsvpForm() {
     return (
       <div
         style={{
+          position: 'relative',
           padding: '32px 24px',
           backgroundColor: '#fff',
           borderRadius: 20,
           textAlign: 'center',
           border: `2px solid ${PINK}`,
+          overflow: 'hidden',
         }}
       >
+        {showBurst && <Confetti count={50} burst />}
         <div style={{ fontSize: 40, marginBottom: 12 }}>💌</div>
         <p style={{ fontSize: 18, color: PINK, margin: 0 }}>
           참석 여부가 전달되었어요!
@@ -166,7 +175,7 @@ export default function RsvpForm() {
           <input
             type="text"
             required
-            placeholder={`ex. ${placeholderName}`}
+            placeholder="ex. 홍길동"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             style={inputStyle}
@@ -201,7 +210,7 @@ export default function RsvpForm() {
               <span style={sectionLabelStyle}>관계</span>
               <input
                 type="text"
-                placeholder={`ex. ${form.side === 'groom' ? '대학 동기' : '직장 동료'}`}
+                placeholder="ex. 대학 동기"
                 value={form.relation}
                 onChange={(e) => setForm({ ...form, relation: e.target.value })}
                 style={inputStyle}

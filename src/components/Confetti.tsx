@@ -18,7 +18,7 @@ interface Piece {
   swayDuration: number;
 }
 
-export default function Confetti({ count = 40 }: { count?: number }) {
+export default function Confetti({ count = 40, burst = false }: { count?: number; burst?: boolean }) {
   const pieces = useMemo<Piece[]>(() =>
     Array.from({ length: count }, (_, i) => ({
       id: i,
@@ -26,11 +26,11 @@ export default function Confetti({ count = 40 }: { count?: number }) {
       size: 6 + Math.random() * 8,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
       shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
-      delay: Math.random() * 8,
-      duration: 4 + Math.random() * 6,
+      delay: burst ? Math.random() * 0.5 : Math.random() * 8,
+      duration: burst ? 1.5 + Math.random() * 2 : 4 + Math.random() * 6,
       swayDuration: 2 + Math.random() * 3,
     })),
-    [count],
+    [count, burst],
   );
 
   return (
@@ -54,7 +54,9 @@ export default function Confetti({ count = 40 }: { count?: number }) {
             height: p.shape === 'strip' ? p.size * 1.8 : p.size,
             backgroundColor: p.color,
             borderRadius: p.shape === 'circle' ? '50%' : p.shape === 'strip' ? 2 : 1,
-            animation: `confetti-fall ${p.duration}s ${p.delay}s linear infinite, confetti-sway ${p.swayDuration}s ${p.delay}s ease-in-out infinite`,
+            animation: burst
+              ? `confetti-burst ${p.duration}s ${p.delay}s ease-out forwards, confetti-sway ${p.swayDuration}s ${p.delay}s ease-in-out ${Math.ceil(p.duration / p.swayDuration)}`
+              : `confetti-fall ${p.duration}s ${p.delay}s linear infinite, confetti-sway ${p.swayDuration}s ${p.delay}s ease-in-out infinite`,
             opacity: 0.85,
           }}
         />
