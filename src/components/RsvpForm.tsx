@@ -12,12 +12,14 @@ const PLACEHOLDER_NAMES = ['성기욱', '이소연'] as const;
 interface FormState {
   name: string;
   side: Side;
+  relation: string;
 }
 
 export default function RsvpForm() {
   const [form, setForm] = useState<FormState>({
     name: '',
     side: '',
+    relation: '',
   });
   const [placeholderName] = useState(
     () => PLACEHOLDER_NAMES[Math.random() < 0.5 ? 0 : 1],
@@ -44,6 +46,7 @@ export default function RsvpForm() {
       attendance: '참석',
       time: '',
       side: form.side === 'bride' ? '신부측' : '신랑측',
+      relation: form.relation.trim(),
     };
 
     try {
@@ -163,7 +166,7 @@ export default function RsvpForm() {
           <input
             type="text"
             required
-            placeholder={placeholderName}
+            placeholder={`ex. ${placeholderName}`}
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             style={inputStyle}
@@ -175,8 +178,8 @@ export default function RsvpForm() {
           <span style={sectionLabelStyle}>신부측 / 신랑측</span>
           <div style={{ display: 'flex', gap: 16 }}>
             {[
-              { value: 'bride', label: '신부측' },
               { value: 'groom', label: '신랑측' },
+              { value: 'bride', label: '신부측' },
             ].map(({ value, label }) => (
               <label key={value} style={radioLabelStyle}>
                 <input
@@ -191,6 +194,20 @@ export default function RsvpForm() {
               </label>
             ))}
           </div>
+
+          {/* 관계 입력 */}
+          {form.side && (
+            <div style={{ marginTop: 12 }}>
+              <span style={sectionLabelStyle}>관계</span>
+              <input
+                type="text"
+                placeholder={`ex. ${form.side === 'groom' ? '대학 동기' : '직장 동료'}`}
+                value={form.relation}
+                onChange={(e) => setForm({ ...form, relation: e.target.value })}
+                style={inputStyle}
+              />
+            </div>
+          )}
         </div>
 
         <p
