@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Confetti from './Confetti';
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw73Z2SCqK6_MvDNKJk_gz3AX8_Tel0gJQq5Lx2yzd60g530Cy4V97ny_fq5MhDcc4ohg/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbySCtJwyVyoqwJPVYjGyIS-WnAAuGDqYJpIdoZhOFAk0H97uCIysD5YDD0rTGwvwsKD9A/exec';
 
 const PINK = '#FF69B4';
 const STORAGE_KEY = 'rsvp_submitted';
