@@ -48,8 +48,6 @@ export default function RsvpForm() {
 
     const payload = {
       name: form.name.trim(),
-      attendance: '참석',
-      time: '',
       side: form.side === 'bride' ? '신부측' : '신랑측',
       relation: form.relation.trim(),
     };
