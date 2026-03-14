@@ -82,7 +82,7 @@ export default function PartyPage() {
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(135deg, #FF69B4 0%, #FF1493 20%, #DA70D6 40%, #FFB6C1 60%, #FF85C0 80%, #E0BBE4 100%)',
+              'linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 20%, #E8A0BF 40%, #FFD6E8 60%, #F0C0D8 80%, #E8D0E8 100%)',
             backgroundSize: '300% 300%',
             animation: 'gradient-shift 12s ease infinite',
             zIndex: 0,

@@ -86,10 +86,10 @@ export default function RsvpForm() {
       >
         {showBurst && <Confetti count={50} burst />}
         <div style={{ fontSize: 40, marginBottom: 12 }}>💌</div>
-        <p style={{ fontSize: 18, color: PINK, margin: 0 }}>
+        <p style={{ fontSize: 18, color: PINK, margin: 0, fontFamily: "'Saenggeo Jincheon', sans-serif" }}>
           참석 여부가 전달되었어요!
         </p>
-        <p style={{ fontSize: 14, color: '#999', marginTop: 8 }}>
+        <p style={{ fontSize: 14, color: '#999', marginTop: 8, fontFamily: "'Saenggeo Jincheon', sans-serif" }}>
           소중한 응답 감사해요 :)
         </p>
         <button
