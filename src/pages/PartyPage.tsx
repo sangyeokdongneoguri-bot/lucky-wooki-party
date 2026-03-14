@@ -645,9 +645,11 @@ export default function PartyPage() {
                     </span>
                   </div>
                   {group.items.map((item, ii) => (
-                    <p
+                    <div
                       key={ii}
                       style={{
+                        display: 'flex',
+                        gap: 8,
                         fontSize: 14,
                         color: '#555',
                         lineHeight: 1.8,
@@ -656,8 +658,9 @@ export default function PartyPage() {
                         paddingLeft: 28,
                       }}
                     >
-                      {item}
-                    </p>
+                      <span style={{ flexShrink: 0 }}>•</span>
+                      <span>{item}</span>
+                    </div>
                   ))}
                 </div>
               </ScrollReveal>
